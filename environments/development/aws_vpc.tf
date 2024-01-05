@@ -34,7 +34,7 @@ module "vpc" {
     "192.168.5.0/24"
   ]
 
-  create_database_subnet_group = true
+  create_db_subnet_group = true
 
   enable_nat_gateway = true
 

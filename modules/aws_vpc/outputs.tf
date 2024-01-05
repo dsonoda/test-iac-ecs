@@ -18,6 +18,10 @@ output "private_db_subnet_ids" {
   value = aws_subnet.private_db[*].id
 }
 
+output "database_subnet_group" {
+  value = aws_db_subnet_group.db[*].id
+}
+
 output "igw_id" {
   value = aws_internet_gateway.igw[*].id
 }

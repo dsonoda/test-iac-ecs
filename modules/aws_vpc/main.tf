@@ -56,17 +56,17 @@ resource "aws_subnet" "private_db" {
 }
 
 # subnet group
-# resource "aws_db_subnet_group" "database" {
-#   count = length(var.private_db_subnet_cidr_blocks) > 0 && var.create_database_subnet_group ? 1 : 0
+resource "aws_db_subnet_group" "db" {
+  count = length(var.private_db_subnet_cidr_blocks) > 0 && var.create_db_subnet_group ? 1 : 0
 
-#   name        = "${var.prefix}-rds-subnet-group"
-#   description = "Database subnet groups for ${var.prefix}"
-#   subnet_ids  = aws_subnet.private_db[*].id
+  name        = "${var.prefix}-rds-subnet-group"
+  description = "Database subnet groups for ${var.prefix}"
+  subnet_ids  = aws_subnet.private_db[*].id
 
-#   tags = merge(var.common_tags, ({
-#     "Name" : format("%s-db-subnet-group", var.prefix)
-#   }))
-# }
+  tags = merge(var.common_tags, ({
+    "Name" : "${var.prefix}-rds-subnet-group"
+  }))
+}
 
 # internet gateway
 resource "aws_internet_gateway" "igw" {

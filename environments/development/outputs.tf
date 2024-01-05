@@ -20,6 +20,10 @@ output "private_db_subnet_ids" {
   value = module.vpc.private_db_subnet_ids
 }
 
+output "database_subnet_group" {
+  value = module.vpc.database_subnet_group
+}
+
 output "igw_id" {
   value = module.vpc.igw_id
 }
