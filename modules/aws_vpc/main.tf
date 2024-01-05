@@ -41,7 +41,7 @@ resource "aws_subnet" "private" {
   }))
 }
 
-# private subnet
+# private db subnet
 resource "aws_subnet" "private_db" {
   count = length(var.private_db_subnet_cidr_blocks)
 
@@ -54,6 +54,19 @@ resource "aws_subnet" "private_db" {
     "Name" : format("%s-private-db-%s", var.prefix, element(var.availability_zones, count.index))
   }))
 }
+
+# subnet group
+# resource "aws_db_subnet_group" "database" {
+#   count = length(var.private_db_subnet_cidr_blocks) > 0 && var.create_database_subnet_group ? 1 : 0
+
+#   name        = "${var.prefix}-rds-subnet-group"
+#   description = "Database subnet groups for ${var.prefix}"
+#   subnet_ids  = aws_subnet.private_db[*].id
+
+#   tags = merge(var.common_tags, ({
+#     "Name" : format("%s-db-subnet-group", var.prefix)
+#   }))
+# }
 
 # internet gateway
 resource "aws_internet_gateway" "igw" {
@@ -76,8 +89,8 @@ resource "aws_eip" "nateip" {
 resource "aws_nat_gateway" "natgw" {
   count = var.enable_nat_gateway ? (var.single_nat_gateway ? 1 : length(var.availability_zones)) : 0
 
-  allocation_id = element(aws_eip.nateip.*.id, (var.single_nat_gateway ? 0 : count.index))
-  subnet_id     = element(aws_subnet.public.*.id, (var.single_nat_gateway ? 0 : count.index))
+  allocation_id = element(aws_eip.nateip[*].id, (var.single_nat_gateway ? 0 : count.index))
+  subnet_id     = element(aws_subnet.public[*].id, (var.single_nat_gateway ? 0 : count.index))
 
   depends_on = [aws_internet_gateway.igw]
 
@@ -108,7 +121,7 @@ resource "aws_route" "public_internet_gateway" {
 resource "aws_route_table_association" "public" {
   count = length(var.public_subnet_cidr_blocks)
 
-  subnet_id      = element(aws_subnet.public.*.id, count.index)
+  subnet_id      = element(aws_subnet.public[*].id, count.index)
   route_table_id = aws_route_table.public[0].id
 }
 
@@ -126,16 +139,16 @@ resource "aws_route_table" "private" {
 resource "aws_route" "private_nat_gateway" {
   count = var.enable_nat_gateway ? (var.single_nat_gateway ? 1 : length(var.availability_zones)) : 0
 
-  route_table_id         = var.single_nat_gateway ? aws_route_table.private[0].id : element(aws_route_table.private.*.id, count.index)
+  route_table_id         = var.single_nat_gateway ? aws_route_table.private[0].id : element(aws_route_table.private[*].id, count.index)
   destination_cidr_block = "0.0.0.0/0"
-  nat_gateway_id         = var.single_nat_gateway ? aws_nat_gateway.natgw[0].id : element(aws_nat_gateway.natgw.*.id, count.index)
+  nat_gateway_id         = var.single_nat_gateway ? aws_nat_gateway.natgw[0].id : element(aws_nat_gateway.natgw[*].id, count.index)
 }
 
 resource "aws_route_table_association" "private" {
   count = length(var.private_subnet_cidr_blocks)
 
-  subnet_id      = element(aws_subnet.private.*.id, count.index)
-  route_table_id = var.single_nat_gateway ? aws_route_table.private[0].id : element(aws_route_table.private.*.id, count.index)
+  subnet_id      = element(aws_subnet.private[*].id, count.index)
+  route_table_id = var.single_nat_gateway ? aws_route_table.private[0].id : element(aws_route_table.private[*].id, count.index)
 }
 
 # private db route table
@@ -152,14 +165,14 @@ resource "aws_route_table" "private_db" {
 resource "aws_route" "private_db_nat_gateway" {
   count = var.enable_nat_gateway ? (var.single_nat_gateway ? 1 : length(var.availability_zones)) : 0
 
-  route_table_id         = var.single_nat_gateway ? aws_route_table.private_db[0].id : element(aws_route_table.private_db.*.id, count.index)
+  route_table_id         = var.single_nat_gateway ? aws_route_table.private_db[0].id : element(aws_route_table.private_db[*].id, count.index)
   destination_cidr_block = "0.0.0.0/0"
-  nat_gateway_id         = var.single_nat_gateway ? aws_nat_gateway.natgw[0].id : element(aws_nat_gateway.natgw.*.id, count.index)
+  nat_gateway_id         = var.single_nat_gateway ? aws_nat_gateway.natgw[0].id : element(aws_nat_gateway.natgw[*].id, count.index)
 }
 
 resource "aws_route_table_association" "private_db" {
   count = length(var.private_db_subnet_cidr_blocks)
 
-  subnet_id      = element(aws_subnet.private_db.*.id, count.index)
-  route_table_id = var.single_nat_gateway ? aws_route_table.private_db[0].id : element(aws_route_table.private_db.*.id, count.index)
+  subnet_id      = element(aws_subnet.private_db[*].id, count.index)
+  route_table_id = var.single_nat_gateway ? aws_route_table.private_db[0].id : element(aws_route_table.private_db[*].id, count.index)
 }
