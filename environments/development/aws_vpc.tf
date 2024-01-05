@@ -40,5 +40,4 @@ module "vpc" {
 
   # Whether to create just one NAT Gateway or not.
   single_nat_gateway = true
-
 }
