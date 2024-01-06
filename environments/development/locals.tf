@@ -9,6 +9,7 @@ locals {
     Provisioner = "terraform"
   }
 
-
+  # ECS Exec
+  enable_ecs_exec = true
 
 }

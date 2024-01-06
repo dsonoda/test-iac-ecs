@@ -1,4 +1,4 @@
-### aws_vpc outputs
+# aws_vpc outputs
 
 output "vpc_id" {
   value = module.vpc.vpc_id
@@ -50,4 +50,13 @@ output "private_route_table_ids" {
 
 output "private_db_route_table_ids" {
   value = module.vpc.private_db_route_table_ids
+}
+
+# aws_iam outputs
+output "ecs_task_role_name" {
+  value = module.iam_ecs_task_role.ecs_task_role_name
+}
+
+output "ecs_task_exec_role_name" {
+  value = module.iam_ecs_task_role.ecs_task_exec_role_name
 }
