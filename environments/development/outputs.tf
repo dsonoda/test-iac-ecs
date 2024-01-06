@@ -57,6 +57,14 @@ output "ecs_task_role_name" {
   value = module.iam_ecs_task_role.ecs_task_role_name
 }
 
+output "ecs_task_role_arn" {
+  value = module.iam_ecs_task_role.ecs_task_role_arn
+}
+
 output "ecs_task_exec_role_name" {
   value = module.iam_ecs_task_role.ecs_task_exec_role_name
+}
+
+output "ecs_task_exec_role_arn" {
+  value = module.iam_ecs_task_role.ecs_task_exec_role_arn
 }
