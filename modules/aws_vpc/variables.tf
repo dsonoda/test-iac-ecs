@@ -18,7 +18,7 @@ variable "vpc" {
   description = "VPC settings"
   type        = map(string)
   default = {
-    cidr                 = ""
+    cidr_block           = ""
     enable_dns_hostnames = ""
     enable_dns_support   = ""
   }

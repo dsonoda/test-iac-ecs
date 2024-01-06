@@ -54,17 +54,41 @@ output "private_db_route_table_ids" {
 
 # aws_iam outputs
 output "ecs_task_role_name" {
-  value = module.iam_ecs_task_role.ecs_task_role_name
+  value = module.iam_ecs_task_roles.ecs_task_role_name
 }
 
 output "ecs_task_role_arn" {
-  value = module.iam_ecs_task_role.ecs_task_role_arn
+  value = module.iam_ecs_task_roles.ecs_task_role_arn
 }
 
 output "ecs_task_exec_role_name" {
-  value = module.iam_ecs_task_role.ecs_task_exec_role_name
+  value = module.iam_ecs_task_roles.ecs_task_exec_role_name
 }
 
 output "ecs_task_exec_role_arn" {
-  value = module.iam_ecs_task_role.ecs_task_exec_role_arn
+  value = module.iam_ecs_task_roles.ecs_task_exec_role_arn
+}
+
+output "security_group_alb_id" {
+  value = module.security_group.security_group_alb_id
+}
+
+output "security_group_ecs_id" {
+  value = module.security_group.security_group_ecs_id
+}
+
+output "security_group_rds_id" {
+  value = module.security_group.security_group_rds_id
+}
+
+output "security_group_vpce_id" {
+  value = module.security_group.security_group_vpce_id
+}
+
+output "security_group_bastion_id" {
+  value = module.security_group.security_group_bastion_id
+}
+
+output "security_group_efs_id" {
+  value = module.security_group.security_group_efs_id
 }
