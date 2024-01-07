@@ -49,7 +49,7 @@ No modules.
 | <a name="input_private_subnet_cidr_blocks"></a> [private\_subnet\_cidr\_blocks](#input\_private\_subnet\_cidr\_blocks) | list of private subnet cidr blocks | `list(string)` | `[]` | no |
 | <a name="input_public_subnet_cidr_blocks"></a> [public\_subnet\_cidr\_blocks](#input\_public\_subnet\_cidr\_blocks) | list of public subnet cidr blocks | `list(string)` | `[]` | no |
 | <a name="input_single_nat_gateway"></a> [single\_nat\_gateway](#input\_single\_nat\_gateway) | should be true if you want to provision a single shared NAT Gateway across all of your private networks | `bool` | `false` | no |
-| <a name="input_vpc"></a> [vpc](#input\_vpc) | VPC settings | `map(string)` | <pre>{<br>  "cidr": "",<br>  "enable_dns_hostnames": "",<br>  "enable_dns_support": ""<br>}</pre> | no |
+| <a name="input_vpc"></a> [vpc](#input\_vpc) | VPC settings | `map(string)` | <pre>{<br>  "cidr_block": "",<br>  "enable_dns_hostnames": "",<br>  "enable_dns_support": ""<br>}</pre> | no |
 
 ## Outputs
 

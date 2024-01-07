@@ -25,3 +25,21 @@ variable "vpc_id" {
   type        = string
   default     = ""
 }
+
+variable "vpc_cidr_block" {
+  description = "vpc cidr block"
+  type        = string
+  default     = ""
+}
+
+variable "alb_to_ecs_port" {
+  description = "alb to ecs port"
+  type        = number
+  default     = 80
+}
+
+variable "rds_port" {
+  description = "rds port"
+  type        = number
+  default     = 5432
+}

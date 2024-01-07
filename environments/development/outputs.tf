@@ -70,25 +70,25 @@ output "ecs_task_exec_role_arn" {
 }
 
 output "security_group_alb_id" {
-  value = module.security_group.security_group_alb_id
+  value = module.security_groups.security_group_alb_id
 }
 
 output "security_group_ecs_id" {
-  value = module.security_group.security_group_ecs_id
+  value = module.security_groups.security_group_ecs_id
 }
 
 output "security_group_rds_id" {
-  value = module.security_group.security_group_rds_id
+  value = module.security_groups.security_group_rds_id
 }
 
 output "security_group_vpce_id" {
-  value = module.security_group.security_group_vpce_id
+  value = module.security_groups.security_group_vpce_id
 }
 
 output "security_group_bastion_id" {
-  value = module.security_group.security_group_bastion_id
+  value = module.security_groups.security_group_bastion_id
 }
 
 output "security_group_efs_id" {
-  value = module.security_group.security_group_efs_id
+  value = module.security_groups.security_group_efs_id
 }

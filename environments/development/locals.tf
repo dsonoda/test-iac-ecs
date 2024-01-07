@@ -11,4 +11,8 @@ locals {
 
   # ECS Exec
   enable_ecs_exec = true
+
+  alb_to_ecs_port = 80
+
+  rds_port = 5432
 }

@@ -41,7 +41,7 @@ module "vpc" {
   single_nat_gateway = true
 }
 
-module "vpc_endpoint" {
+module "vpc_endpoints" {
   source = "../../modules/aws_vpc_endpoints"
 
   region      = local.region
@@ -50,7 +50,7 @@ module "vpc_endpoint" {
 
   vpc_id             = module.vpc.vpc_id
   subnet_ids         = module.vpc.private_subnet_ids
-  security_group_ids = [module.security_group.security_group_vpce_id]
+  security_group_ids = [module.security_groups.security_group_vpce_id]
 
   enable_ecs_exec = local.enable_ecs_exec
 
