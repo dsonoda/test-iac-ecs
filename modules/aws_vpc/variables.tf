@@ -54,12 +54,6 @@ variable "private_db_subnet_cidr_blocks" {
   default     = []
 }
 
-variable "create_db_subnet_group" {
-  description = "Controls, if should database subnet group be created."
-  type        = bool
-  default     = true
-}
-
 variable "enable_nat_gateway" {
   description = "should be true if you want to provision NAT Gateways for each of your private networks"
   type        = bool

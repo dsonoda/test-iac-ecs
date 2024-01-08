@@ -17,7 +17,6 @@ No modules.
 
 | Name | Type |
 |------|------|
-| [aws_db_subnet_group.db](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_subnet_group) | resource |
 | [aws_eip.nateip](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/eip) | resource |
 | [aws_internet_gateway.igw](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/internet_gateway) | resource |
 | [aws_nat_gateway.natgw](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/nat_gateway) | resource |
@@ -41,7 +40,6 @@ No modules.
 |------|-------------|------|---------|:--------:|
 | <a name="input_availability_zones"></a> [availability\_zones](#input\_availability\_zones) | list of availability\_zones | `list(string)` | `[]` | no |
 | <a name="input_common_tags"></a> [common\_tags](#input\_common\_tags) | A map of tags to add to all resources | `map(string)` | <pre>{<br>  "Environment": "",<br>  "Provisioner": "terraform",<br>  "Service": ""<br>}</pre> | no |
-| <a name="input_create_db_subnet_group"></a> [create\_db\_subnet\_group](#input\_create\_db\_subnet\_group) | Controls, if should database subnet group be created. | `bool` | `true` | no |
 | <a name="input_enable_nat_gateway"></a> [enable\_nat\_gateway](#input\_enable\_nat\_gateway) | should be true if you want to provision NAT Gateways for each of your private networks | `bool` | `false` | no |
 | <a name="input_map_public_ip_on_launch"></a> [map\_public\_ip\_on\_launch](#input\_map\_public\_ip\_on\_launch) | should be false if you do not want to auto-assign public IP on launch | `bool` | `true` | no |
 | <a name="input_prefix"></a> [prefix](#input\_prefix) | resource name prefix | `string` | `""` | no |
@@ -55,7 +53,6 @@ No modules.
 
 | Name | Description |
 |------|-------------|
-| <a name="output_database_subnet_group"></a> [database\_subnet\_group](#output\_database\_subnet\_group) | n/a |
 | <a name="output_igw_id"></a> [igw\_id](#output\_igw\_id) | n/a |
 | <a name="output_nat_eips"></a> [nat\_eips](#output\_nat\_eips) | n/a |
 | <a name="output_nat_eips_public_ips"></a> [nat\_eips\_public\_ips](#output\_nat\_eips\_public\_ips) | n/a |

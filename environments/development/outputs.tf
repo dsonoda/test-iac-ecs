@@ -20,10 +20,6 @@ output "private_db_subnet_ids" {
   value = module.vpc.private_db_subnet_ids
 }
 
-output "database_subnet_group" {
-  value = module.vpc.database_subnet_group
-}
-
 output "igw_id" {
   value = module.vpc.igw_id
 }
@@ -91,4 +87,24 @@ output "security_group_bastion_id" {
 
 output "security_group_efs_id" {
   value = module.security_groups.security_group_efs_id
+}
+
+output "db_subnet_group_name" {
+  value = aws_db_subnet_group.group[0].name
+}
+
+output "db_parameter_group_name" {
+  value = aws_db_parameter_group.group.name
+}
+
+output "db_1_hostname" {
+  value = aws_db_instance.db_1.address
+}
+
+output "db_1_name" {
+  value = aws_db_instance.db_1.db_name
+}
+
+output "db_1_master_user_secret_arn" {
+  value = aws_db_instance.db_1.master_user_secret.0.secret_arn
 }
